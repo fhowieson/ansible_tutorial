@@ -1,0 +1,40 @@
+---
+- hosts: webservers
+  tasks:
+  - name: Make sure all OS patches are applied
+    yum:
+        name: '*'
+        state: latest
+    become_user: root
+
+  - name: Install Git packages for AWS Linux
+    yum:
+        name: 'git'
+        state: present
+    become: true
+    become_user: root
+
+  - name: Install Nginx packages for AWS Linux
+    yum:
+        name: 'nginx'
+        state: present
+    become: true
+    become_user: root
+
+  - name: Start Nginx Service
+    service: name=nginx state=restarted
+    become: true
+    become_user: root
+
+  - name: Install Tomcat packages for AWS Linux
+    yum:
+        name: 'tomcat8'
+        state: present
+    become: true
+    become_user: root
+
+  - name: Start Tomcat Service
+    service: name=tomcat8 state=restarted
+    become: true
+    become_user: root
+

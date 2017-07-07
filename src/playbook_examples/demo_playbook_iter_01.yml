@@ -1,0 +1,7 @@
+---
+- hosts: webservers
+  tasks:
+  - name: Make sure all OS patches are applied
+    yum:
+        name: '*'
+        state: latest
